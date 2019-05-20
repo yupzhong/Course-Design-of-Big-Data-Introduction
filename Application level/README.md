@@ -39,7 +39,7 @@
 通过训练数据建立推荐模型,预测12.19这一天用户在P上的购买情况。
 ### 评估指标
 采用经典的精确度(precision)、召回率(recall)和F1值作为评估指标。具体计算公式如下：
-![计算公式][2]
+![计算公式][2]  
 其中PredictionSet为算法预测的购买数据集合，ReferenceSet为真实的答案购买数据集合。
 ### 数据可视化
 在建立模型之前,我们先进行一些简单的可视化,对数据内涵进行初步挖掘。
@@ -52,13 +52,12 @@ import pandas as pd
 count_all = 0
 count_4 = 0
 for df in pd.read_csv(open("../../data/fresh_comp_offline/tianchi_fresh_comp_train_user.csv", 'r'), chunksize=100000):
-count_user = df['behavior_type'].value_counts()
-count_all += count_user[1] + count_user[2] + count_user[3] + count_user[4]
-count_4 += count_user[4]
+    count_user = df['behavior_type'].value_counts()
+    count_all += count_user[1] + count_user[2] + count_user[3] + count_user[4]
+    count_4 += count_user[4]
 ctr = count_4 / count_all
 print(ctr)
 ```
-
 ```CTR = 购买数/操作总数 = 232579 / 23291027 = 0.009985776926023916 ≈ 1%```
 #### 用户行为统计
 

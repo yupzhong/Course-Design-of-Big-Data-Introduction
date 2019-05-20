@@ -17,19 +17,21 @@
 ## 成果展示
 ### 数据内容
 20000用户的完整行为数据以及百万级的商品信息。数据包含两个部分。
-第一部分是用户在商品全集上的移动端行为数据（D）,表名为tianchi_fresh_comp_train_user，包含如下字段：
-字段 | 字段说明 | 提取说明
-------------- | -------- | --------
-user_id | 用户标识 | 抽样&字段脱敏 
-item_id | 商品标识 | 字段脱敏 
-behavior_type | 用户对商品的行为类型 | 包括浏览、收藏、加购物车、购买，对应取值分别是1、2、3、4
-item_category | 商品分类标识 | 字段脱敏
-time | 行为时间 | 精确到小时级别
+
+| 字段 | 字段说明 | 提取说明 |
+| ---  | -------- | -------- |
+| user_id | 用户标识 | 抽样&字段脱敏 |
+|  item_id | 商品标识 | 字段脱敏 |
+| behavior_type | 用户对商品的行为类型 | 包括浏览、收藏、加购物车、购买，对应取值分别是1、2、3、4|
+| item_category | 商品分类标识 | 字段脱敏 |
+| time | 行为时间 | 精确到小时级别 |
+
 第二个部分是商品子集（P）,表名为tianchi_fresh_comp_train_item，包含如下字段：
-字段 | 字段说明 | 提取说明
----  | -------- | --------
-item_id | 商品标识 | 字段脱敏
-item_category | 商品分类标识 | 字段脱敏
+
+| 字段 | 字段说明 | 提取说明 |
+| ---  | -------- | -------- |
+|  item_id | 商品标识 | 字段脱敏 |
+| item_category | 商品分类标识 | 字段脱敏 |
 
 > 数据脱敏的定义为：指对某些敏感信息通过脱敏规则进行数据的变形，实现敏感隐私数据的可靠保护。在涉及客户安全数据或者一些商业性敏感数据的情况下，在不违反系统规则条件下，对真实数据进行改造并提供测试使用，如身份证号、手机号、卡号、客户号等个人信息都需要进行数据脱敏。
 
@@ -45,16 +47,19 @@ item_category | 商品分类标识 | 字段脱敏
 
 > CTR（Click-Through-Rate）即点击通过率，是互联网广告常用的术语，指网络广告（图片广告/文字广告/关键词广告/排名广告/视频广告等）的点击到达率，即该广告的实际点击次数（严格的来说，可以是到达目标页面的数量）除以广告的展现量（Show content）。对于电商平台来说,即为购买数/操作总数。
 
-    import pandas as pd
-    count_all = 0
-    count_4 = 0
-    for df in pd.read_csv(open("../../data/fresh_comp_offline/tianchi_fresh_comp_train_user.csv", 'r'), chunksize=100000):
-        count_user = df['behavior_type'].value_counts()
-        count_all += count_user[1] + count_user[2] + count_user[3] + count_user[4]
-        count_4 += count_user[4]
-    ctr = count_4 / count_all
-    print(ctr)
-CTR = 购买数/操作总数 = 232579 / 23291027 = 0.009985776926023916 ≈ 1%
+```python
+import pandas as pd
+count_all = 0
+count_4 = 0
+for df in pd.read_csv(open("../../data/fresh_comp_offline/tianchi_fresh_comp_train_user.csv", 'r'), chunksize=100000):
+count_user = df['behavior_type'].value_counts()
+count_all += count_user[1] + count_user[2] + count_user[3] + count_user[4]
+count_4 += count_user[4]
+ctr = count_4 / count_all
+print(ctr)
+```
+
+```CTR = 购买数/操作总数 = 232579 / 23291027 = 0.009985776926023916 ≈ 1%```
 #### 用户行为统计
 
 ## 心得体会
